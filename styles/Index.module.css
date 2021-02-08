@@ -1,0 +1,8 @@
+.index {
+    margin: 0 auto;
+    padding: 10px;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

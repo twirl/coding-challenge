@@ -1,4 +1,4 @@
-{
+export const sample = {
     "size": 25,
     "nextOffset": "00240010065245504f525412001011c347a7223a4b6f8b26e492474873c1f07fffffe6f07fffffe6a3539452cd1fbcc586b66baa8f01a76c0004",
     "elements": [
@@ -478,4 +478,4 @@
             "created": "2017-11-09T15:34:49.182Z"
         }
     ]
-}
+};
