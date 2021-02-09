@@ -10,7 +10,7 @@ export default class Report extends Component {
         const { payload } = data;
         return (
             <section className={styles.report} key={data.id}>
-                <div className={styles.view}>
+                <div className={styles.view} key="view">
                     {Object.entries({
                         id: data.id,
                         type: payload.reportType,
@@ -20,13 +20,14 @@ export default class Report extends Component {
                     }).map(([type, value]) => (
                         <span
                             className={styles.item}
+                            key={type}
                             dangerouslySetInnerHTML={{
                                 __html: l10n.items[type](value)
                             }}
                         />
                     ))}
                 </div>
-                <div className={styles.actions}>
+                <div className={styles.actions} key="actions">
                     {['block', 'resolve'].map((action) => (
                         <button className={styles.button}>
                             {l10n.actions[action]()}

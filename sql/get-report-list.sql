@@ -1,0 +1,1 @@
+SELECT id, external_ref, data FROM reports;

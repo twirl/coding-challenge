@@ -13,7 +13,7 @@ export default function Home() {
             </Head>
             <h2>{l10n.reports()}</h2>
             {sample.elements.map((el) => (
-                <Report data={el} l10n={l10n} />
+                <Report data={el} l10n={l10n} key={el.id} />
             ))}
         </section>
     );

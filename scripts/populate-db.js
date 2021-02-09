@@ -5,6 +5,7 @@ const pool = new Pool({
 
 pool.connect()
     .then(async (client) => {
+        await client.query('TRUNCATE TABLE reports');
         for (let i = 0; i < sample.elements.length; i++) {
             const report = sample.elements[i];
             await client.query(
