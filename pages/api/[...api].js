@@ -11,6 +11,9 @@ const app = express()
     .use(async (req, res, next) => {
         req.client = await pool.connect();
         res.header('Content-Type', 'application/json');
+        res.on('finish', () => {
+            req.client.release();
+        });
         next();
     })
     .get('/api/v1', getReportList)
@@ -24,6 +27,7 @@ const app = express()
         });
     })
     .use((e, req, res, next) => {
+        console.error('API error', e);
         res.status(500);
         res.json({
             type: 'internal_server_error',
