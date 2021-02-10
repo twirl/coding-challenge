@@ -1,0 +1,1 @@
+UPDATE reports SET status = $1 WHERE external_ref = $2;

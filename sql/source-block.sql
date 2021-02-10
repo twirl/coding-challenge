@@ -1,0 +1,1 @@
+UPDATE sources SET blocked = $1 WHERE external_ref = $2;

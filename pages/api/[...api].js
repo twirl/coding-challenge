@@ -1,6 +1,8 @@
 import { Pool } from 'pg';
 import express from 'express';
 import getReportList from '../../api/get-report-list';
+import blockSource from '../../api/block-source';
+import resolveReport from '../../api/resolve-report';
 
 const pool = new Pool({
     connectionString: process.env['DATABASE_URL']
@@ -12,6 +14,8 @@ const app = express()
         next();
     })
     .get('/api/v1', getReportList)
+    .put('/api/v1/sources/:id/block', blockSource)
+    .put('/api/v1/reports/:id', resolveReport)
     .use((req, res) => {
         res.status(404);
         res.json({
@@ -28,3 +32,11 @@ const app = express()
     });
 
 export default app;
+
+export const config = {
+    api: {
+        bodyParser: {
+            sizeLimit: '1mb'
+        }
+    }
+};
