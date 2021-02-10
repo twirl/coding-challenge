@@ -29,7 +29,7 @@ export default class Report extends Component {
                 </div>
                 <div className={styles.actions} key="actions">
                     {['block', 'resolve'].map((action) => (
-                        <button className={styles.button}>
+                        <button className={styles.button} key={action}>
                             {l10n.actions[action]()}
                         </button>
                     ))}
