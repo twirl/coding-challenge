@@ -7,6 +7,7 @@ export const index = {
         type: (type) => `Type: ${type}`,
         message: (message) => `Message: ${message || '<strong>N/A</strong>'}`
     },
+    blocked: () => `Blocked`,
     actions: {
         block: () => `Block`,
         resolve: () => `Resolve`

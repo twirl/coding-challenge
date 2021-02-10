@@ -1,1 +1,1 @@
-SELECT id, external_ref, data FROM reports;
+SELECT b.blocked, a.data FROM reports a INNER JOIN sources b ON b.id = a.source_id;

@@ -6,11 +6,30 @@ const pool = new Pool({
 pool.connect()
     .then(async (client) => {
         await client.query('TRUNCATE TABLE reports');
+        await client.query('TRUNCATE TABLE sources CASCADE');
+        const known = new Set();
         for (let i = 0; i < sample.elements.length; i++) {
             const report = sample.elements[i];
+            let id;
+            if (known.has(report.sourceIdentityId)) {
+                id = (
+                    await client.query(
+                        'SELECT id FROM sources WHERE external_ref = $1',
+                        [report.sourceIdentityId]
+                    )
+                ).rows[0].id;
+            } else {
+                id = (
+                    await client.query(
+                        'INSERT INTO sources (external_ref, blocked) VALUES ($1, $2) RETURNING id',
+                        [report.sourceIdentityId, known.size % 2 == 1]
+                    )
+                ).rows[0].id;
+                known.add(report.sourceIdentityId);
+            }
             await client.query(
-                'INSERT INTO reports (external_ref, status, data) VALUES ($1, $2, $3)',
-                [report.id, report.state, report]
+                'INSERT INTO reports (external_ref, source_id, status, data) VALUES ($1, $2, $3, $4)',
+                [report.id, id, report.state, report]
             );
         }
         client.release();

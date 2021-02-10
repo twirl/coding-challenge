@@ -28,11 +28,22 @@ export default class Report extends Component {
                     ))}
                 </div>
                 <div className={styles.actions} key="actions">
-                    {['block', 'resolve'].map((action) => (
-                        <button className={styles.button} key={action}>
-                            {l10n.actions[action]()}
+                    {data.blocked ? (
+                        <button
+                            className={styles.button}
+                            key="blocked"
+                            disabled="disabled"
+                        >
+                            {l10n.blocked()}
                         </button>
-                    ))}
+                    ) : (
+                        <button className={styles.button} key="block">
+                            {l10n.actions.block()}
+                        </button>
+                    )}
+                    <button className={styles.button} key="resolve">
+                        {l10n.actions.resolve()}
+                    </button>
                 </div>
             </section>
         );
